@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { API_VERSION } = require("./constants");
+const burnRoutes = require("./router/burn");
+const bodyRoutes = require("./router/bodyPart");
 
 const app = express();
 
@@ -20,6 +22,9 @@ app.use(express.static("uploads"));
 app.use(cors());
 
 // Configure routings
+
+app.use(`/api/${API_VERSION}`, burnRoutes);
+app.use(`/api/${API_VERSION}`, bodyRoutes);
 app.use(`/api/${API_VERSION}`, authRoutes);
 app.use(`/api/${API_VERSION}`, userRoutes);
 
